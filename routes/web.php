@@ -23,4 +23,4 @@ Route::get('/home', 'UsersController@index')->name('home');
 
 Route::resource('user', 'UsersController');
 Route::get('user/{user}', 'UsersController@show')->name('profile');
-Route::get('search/{id}', 'SearchController@search')->name('search');
+Route::post('search/{id}', 'SearchController@search')->name('search');
