@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-sm-3">
                 <div class="center mt-5">
-                    <img class="rounded-circle" src="/img/{{ Auth::user()->photo ? Auth::user()->photo->name : '123'}}" style="width:100px; border-radius:15px;">
+                    <img class="rounded-circle" src="/img/{{ $photo ? $photo->name : 'notfound.png' }}" style="width:100px; border-radius:15px;">
                 </div>
                 <div class="center mt-5">
                     {{ Auth::user()->name }}
@@ -44,6 +44,7 @@
         <div class="row">
             <div class="col-sm-6 offset-sm-3">
                 @foreach(Auth::user()->posts as $post)
+                    Posted By: {{Auth::user()->name}} <strong>(you)</strong>
                     <div class="card mb-3">
                         <img src="/img/{{ $post->photo ? $post->photo->name : '' }}" class="card-img-top">
                         <div class="card-body">
@@ -51,6 +52,24 @@
                             <p class="card-text">{{ $post->body }}</p>
                         </div>
                     </div>
+                @endforeach
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+                @foreach(Auth::user()->relations as $relation)
+                    @if($relation->user)
+                        @foreach($relation->user->posts as $post)
+                            Posted By: {{$relation->user->name}}
+                            <div class="card mb-3">
+                                <img src="/img/{{ $post->photo ? $post->photo->name : '' }}" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $post->title }}</h5>
+                                    <p class="card-text">{{ $post->body }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
                 @endforeach
             </div>
         </div>

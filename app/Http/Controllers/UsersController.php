@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Photo;
+use Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 class UsersController extends Controller
@@ -20,7 +21,8 @@ class UsersController extends Controller
      */
     public function index()
     {        
-        return view('users.home');
+        $photo = Photo::where('meta_data', 'profile_pic')->where('user_id', Auth::user()->id)->first();
+        return view('users.home', compact('photo'));
     }
 
     /**
@@ -53,7 +55,7 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-        $photo = Photo::where('user_id', $id)->where('meta_data', 'profile_pic')->first();
+        $photo = Photo::where('meta_data', 'profile_pic')->where('user_id', $id)->first();
         return view('users.profile', compact('user', 'photo'));
     }
 

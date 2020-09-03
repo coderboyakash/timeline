@@ -12,14 +12,17 @@
         <div class="center mt-5">
             <div class="row">
                 <div class="col-sm-4">
-                    <img style="border-radius: 50px; width:150px; height:150px;" src="/img/{{ $user->photo ? $user->photo->name : '123'}}">
+                    <img style="border-radius: 50px; width:150px; height:150px;" src="/img/{{ $photo ? $photo->name : 'notfound.png' }}">
                 </div>
                 <div class="col-sm-8">
                     <div>
                         Name : {{ $user->name }}
                     </div>
                     <div>
-                        No of friends: 100
+                        No of friends: {{ count($user->relations) }}
+                    </div>
+                    <div>
+                        No of Posts: {{ count($user->posts) }}
                     </div>
                 </div>
             </div>
@@ -28,7 +31,7 @@
         <div class="row">
             <div class="col-sm-6">
             <h4>All Posts</h4><hr>
-                @foreach(Auth::user()->posts as $post)
+                @foreach($user->posts as $post)
                     <div class="card mb-3">
                         <img src="/img/{{ $post->photo ? $post->photo->name : '' }}" class="card-img-top">
                         <div class="card-body">
@@ -40,7 +43,7 @@
             </div>
             <div class="col-sm-4 offset-sm-1" >
                 <h4>All Friends</h4><hr>
-                @foreach(Auth::user()->relations as $relation)
+                @foreach($user->relations as $relation)
                     @if($relation->user)
                         <div>
                             Name : {{ $relation->user ? $relation->user->name : '' }}

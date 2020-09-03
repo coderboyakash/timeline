@@ -25,7 +25,7 @@
                         <input type="hidden" name="token" value="{{ Str::random(32) }}">
                         <input type="submit" class="btn btn-primary" value="Send Request">
                     </form>
-                    <a href="#" class="btn btn-success ml-1">View Profile</a>
+                    <a href="{{ route('profile', $user->id) }}" class="btn btn-success ml-1">View Profile</a>
                 </div>    
             </div>
             @else
@@ -48,7 +48,7 @@
                             <input type="submit" class="btn btn-warning" value="Confirm">
                         </form>
                     @endif
-                        <a href="#" class="btn btn-success ml-1">View Profile</a>
+                        <a href="{{ route('profile', $user->id) }}" class="btn btn-success ml-1">View Profile</a>
                 </div>    
             </div>
             @endif
