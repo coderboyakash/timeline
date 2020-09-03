@@ -15,6 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     @yield('link')
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -36,10 +37,10 @@
                     @guest
                         @else
                             <li class="nav-item">
-                                <form class="form-inline my-2 my-lg-0 ml-5" action="{{ route('search', Auth::user()->id) }}" method="POST">
+                                <form class="form-inline my-2 my-lg-0 ml-5" action="{{ route('search') }}" method="GET">
                                     <div class="form-group">
                                         @csrf
-                                        <input type="text" name="search" class="form-control" placeholder="Search new friends">
+                                        <input type="text" name="search" value="{{ old('search') }}" class="form-control" placeholder="Search new friends">
                                     </div>
                                 </form>
                             </li>
@@ -59,7 +60,18 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
+                        <li class="nav-item dropdown dropleft">
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-bell-o mr-5" aria-hidden="true"></i>
+                            </a>
+                            <div class="dropdown-menu mt-5" aria-labelledby="navbarDropdown">
+                                @foreach(Auth::user()->requests as $request)
+                                    <!-- <div class="dropdown-divider"></div> -->
+                                    <a class="dropdown-item" href="">{{ $request->sender->name }}</a>
+                                @endforeach
+                            </div>
+                        </li>
+                                                <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>

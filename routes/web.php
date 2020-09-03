@@ -23,5 +23,6 @@ Route::get('/home', 'UsersController@index')->name('home');
 
 Route::resource('user', 'UsersController');
 Route::resource('user/post', 'PostsController');
+Route::resource('user/friendrequest', 'FriendRequestsController');
 Route::get('user/{user}', 'UsersController@show')->name('profile');
-Route::post('search/{id}', 'SearchController@search')->name('search');
+Route::get('search', 'SearchController@search')->name('search');

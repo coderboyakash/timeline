@@ -49,4 +49,7 @@ class User extends Authenticatable
     public function relations(){
         return $this->hasMany('App\Relation', 'user_1');
     }
+    public function requests(){
+        return $this->hasMany('App\FriendRequest');
+    }
 }
