@@ -33,7 +33,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto ml-5">
-                        <!--  -->
+                    @guest
+                        @else
+                            <li class="nav-item">
+                                <form class="form-inline my-2 my-lg-0 ml-5" action="{{ route('search', Auth::user()->id) }}" method="POST">
+                                    <div class="form-group">
+                                        @csrf
+                                        <input type="text" name="search" class="form-control" placeholder="Search new friends">
+                                    </div>
+                                </form>
+                            </li>
+                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->

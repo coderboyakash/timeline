@@ -24,5 +24,31 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+            <h4>All Posts</h4><hr>
+                @foreach(Auth::user()->posts as $post)
+                    <div class="card mb-3">
+                        <img src="/img/{{ $post->photo ? $post->photo->name : '' }}" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $post->title }}</h5>
+                            <p class="card-text">{{ $post->body }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <div class="col-sm-4 offset-sm-1" >
+                <h4>All Friends</h4><hr>
+                @foreach(Auth::user()->relations as $relation)
+                    @if($relation->user)
+                        <div>
+                            Name : {{ $relation->user ? $relation->user->name : '' }}
+                        </div>
+                    @endif
+                    
+                @endforeach
+            </div>
+        </div>
     </div>
 @endsection

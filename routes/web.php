@@ -22,5 +22,6 @@ Auth::routes();
 Route::get('/home', 'UsersController@index')->name('home');
 
 Route::resource('user', 'UsersController');
+Route::resource('user/post', 'PostsController');
 Route::get('user/{user}', 'UsersController@show')->name('profile');
 Route::post('search/{id}', 'SearchController@search')->name('search');
