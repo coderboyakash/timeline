@@ -66,8 +66,21 @@
                             </a>
                             <div class="dropdown-menu mt-5" aria-labelledby="navbarDropdown">
                                 @foreach(Auth::user()->requests as $request)
-                                    <!-- <div class="dropdown-divider"></div> -->
-                                    <a class="dropdown-item" href="">{{ $request->sender->name }}</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item ml-4 mr-5" href="">{{ $request->sender->name }}</a>
+                                    <form action="{{ route('friendrequest.update', Auth::user()->id) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="sender_id" value="{{ $request->sender->id }}">
+                                        <input type="hidden" name="token" value="{{ $request->token }}">
+                                        <input type="submit" class="btn btn-warning w-75 ml-4 mt-2" value="Confirm">
+                                    </form>
+                                    <form action="{{ route('friendrequest.destroy', Auth::user()->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="token" value="{{ $request->token }}">
+                                        <input type="submit" class="btn btn-danger w-75 ml-4 mt-2" value="Reject">
+                                    </form>
                                 @endforeach
                             </div>
                         </li>

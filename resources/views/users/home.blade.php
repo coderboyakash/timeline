@@ -49,7 +49,28 @@
                         <img src="/img/{{ $post->photo ? $post->photo->name : '' }}" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title">{{ $post->title }}</h5>
-                            <p class="card-text">{{ $post->body }}</p>
+                            <p class="card-text">{{ $post->body }} <span class="pull-right">[{{$post->created_at->diffForHumans()}}]</span></p>
+                        </div>
+                        <div class="row m-0">
+                            <div class="col-sm-12">
+                                <form action="">
+                                    @csrf
+                                    <div class="form-group">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                    <input type="button" class="btn btn-primary w-100 mb-2" value="Comment">
+                                </form>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <button class="btn btn-primary w-100 mb-2">Like</button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button class="btn btn-primary w-100 mb-2">Show Post</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -65,7 +86,28 @@
                                 <img src="/img/{{ $post->photo ? $post->photo->name : '' }}" class="card-img-top">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $post->title }}</h5>
-                                    <p class="card-text">{{ $post->body }}</p>
+                                    <p class="card-text">{{ $post->body }} <span class="pull-right">[{{$post->created_at->diffForHumans()}}]</span></p>
+                                </div>
+                                <div class="row m-0">
+                                    <div class="col-sm-12">
+                                        <form action="">
+                                            @csrf
+                                            <div class="form-group">
+                                                <input type="text" class="form-control">
+                                            </div>
+                                            <input type="button" class="btn btn-primary w-100 mb-2" value="Comment">
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <button class="btn btn-primary w-100 mb-2">Like</button>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <button class="btn btn-primary w-100 mb-2">Show Post</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach

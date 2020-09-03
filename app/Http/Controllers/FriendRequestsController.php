@@ -77,7 +77,6 @@ class FriendRequestsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
         FriendRequest::where("token", $request->token)->delete();
         $data = $request->validate([
             'sender_id' => ['required'],
@@ -100,8 +99,9 @@ class FriendRequestsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        FriendRequest::where("token", $request->token)->delete();
+        return redirect('search');
     }
 }
