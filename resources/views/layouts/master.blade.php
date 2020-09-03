@@ -62,7 +62,7 @@
                         @else
                         <li class="nav-item dropdown dropleft">
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-bell-o mr-5" aria-hidden="true"></i>
+                                <i class="fa fa-bell-o" aria-hidden="true"></i>{{count(Auth::user()->requests)}}
                             </a>
                             <div class="dropdown-menu mt-5" aria-labelledby="navbarDropdown">
                                 @foreach(Auth::user()->requests as $request)
