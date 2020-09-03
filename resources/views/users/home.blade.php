@@ -50,6 +50,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $post->title }}</h5>
                             <p class="card-text">{{ $post->body }} <span class="pull-right">[{{$post->created_at->diffForHumans()}}]</span></p>
+                            <span class="pull-left"><a href="#" class="text-decoration-none">5k Likes</a></span><span class="pull-right"><a href="#" class="text-decoration-none">5k Comments</a></span>
                         </div>
                         <div class="row m-0">
                             <div class="col-sm-12">
@@ -58,13 +59,13 @@
                                     <div class="form-group">
                                         <input type="text" class="form-control">
                                     </div>
-                                    <input type="button" class="btn btn-primary w-100 mb-2" value="Comment">
+                                    <button type="submit" class="btn btn-primary w-100 mb-2"> <i class="fa fa-comment"></i> Comments</button>
                                 </form>
                             </div>
                             <div class="col-sm-12">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <button class="btn btn-primary w-100 mb-2">Like</button>
+                                        <button class="btn btn-primary w-100 mb-2"><i class="fa fa-thumbs-up"></i> Like</button>
                                     </div>
                                     <div class="col-sm-6">
                                         <button class="btn btn-primary w-100 mb-2">Show Post</button>
@@ -87,6 +88,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $post->title }}</h5>
                                     <p class="card-text">{{ $post->body }} <span class="pull-right">[{{$post->created_at->diffForHumans()}}]</span></p>
+                                    <span class="pull-left"><a href="#" class="text-decoration-none">5k Likes</a></span><span class="pull-right"><a href="#" class="text-decoration-none">5k Comments</a></span>
                                 </div>
                                 <div class="row m-0">
                                     <div class="col-sm-12">
@@ -95,13 +97,13 @@
                                             <div class="form-group">
                                                 <input type="text" class="form-control">
                                             </div>
-                                            <input type="button" class="btn btn-primary w-100 mb-2" value="Comment">
+                                            <button type="submit" class="btn btn-primary w-100 mb-2"> <i class="fa fa-comment"></i> Comments</button>
                                         </form>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <button class="btn btn-primary w-100 mb-2">Like</button>
+                                                <button class="btn btn-primary w-100 mb-2"><i class="fa fa-thumbs-up"></i> Like</button>
                                             </div>
                                             <div class="col-sm-6">
                                                 <button class="btn btn-primary w-100 mb-2">Show Post</button>
