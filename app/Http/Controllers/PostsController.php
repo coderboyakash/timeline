@@ -53,7 +53,6 @@ class PostsController extends Controller
                 'post_id' => $post->id,
                 'user_id' => $request->user_id,
                 'name' => $image_name,
-                'meta_data' => 'post_pic'
             ]);
             $request->session()->flash('success', 'Post Published Successfully');
             return redirect('home');

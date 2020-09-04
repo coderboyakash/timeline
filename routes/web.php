@@ -27,4 +27,4 @@ Route::resource('user/like', 'LikesController');
 Route::resource('user/post', 'PostsController');
 Route::resource('user/friendrequest', 'FriendRequestsController');
 Route::get('user/{user}', 'UsersController@show')->name('profile');
-Route::get('search', 'SearchController@search')->name('search');
+Route::get('search', 'UsersController@search')->name('search');

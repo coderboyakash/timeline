@@ -96,11 +96,10 @@ class UsersController extends Controller
                 'email' => $data['email'],
                 'password' => Hash::make($data['password'])
             ]);
-            Photo::where('user_id', $id)->where('meta_data', 'profile_pic')->delete();
+            Photo::where('user_id', $id)->where('post_id', NULL)->delete();
             Photo::create([
                 'user_id' => $id,
                 'name' => $image_name,
-                'meta_data' => 'profile_pic'
             ]);
             $request->session()->flash('success', 'Profile Updated Successfully');
             return redirect('home');
@@ -124,5 +123,10 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function search(Request $request){
+        $query = $request->input('search');
+        $users = User::where('id', '!=', Auth::user()->id)->where('name', 'like', '%'.$query.'%')->get();
+        return view('searchs.index', compact('users'));
     }
 }
