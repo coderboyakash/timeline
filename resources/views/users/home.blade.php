@@ -9,8 +9,8 @@
 @endsection
 @section('content')
     <div class="container">
-        @if(session('success'))
-        <div class="alert alert-success">{{session('success')}}</div>
+        @if(session('message'))
+        <div class="alert alert-success">{{session('message')}}</div>
         @endif
         <div class="row">
             <div class="col-sm-3">
@@ -27,10 +27,20 @@
                     @csrf
                     <input type="hidden" value="{{ Auth::user()->id }}" name="user_id">
                     <div class="form-group">
-                        <input type="text" name="title" class="form-control" placeholder="Title">
+                        <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" placeholder="Title">
+                        @error('title')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="form-group">
-                        <input type="text" name="body" class="form-control" placeholder="Body">
+                        <input type="text" name="post_body" class="form-control @error('post_body') is-invalid @enderror" placeholder="Body">
+                        @error('post_body')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>The body field is required.</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <input type="file" name="image" class="form-control-file">

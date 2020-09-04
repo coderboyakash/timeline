@@ -98,14 +98,14 @@ class UsersController extends Controller
                 'user_id' => $id,
                 'name' => $image_name,
             ]);
-            $request->session()->flash('success', 'Profile Updated Successfully');
+            $request->session()->flash('message', 'Profile Updated Successfully');
             return redirect('home');
         }else{
             User::where('id', $id)->update([
                 'name' => $request->name,
                 'email' => $request->email
             ]);
-            $request->session()->flash('success', 'Profile Updated Successfully');
+            $request->session()->flash('message', 'Profile Updated Successfully');
             return redirect('home');
         }
     }

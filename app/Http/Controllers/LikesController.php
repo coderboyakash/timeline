@@ -41,6 +41,7 @@ class LikesController extends Controller
             'post_id' => ['required'],
         ]);
         Like::create($request->all());
+        $request->session()->flash('message', 'Like added Successfully');
         return back();
     }
 
@@ -87,6 +88,7 @@ class LikesController extends Controller
     public function destroy(Request $request, $id)
     {
         Like::where('user_id', Auth::user()->id)->where('post_id', $id)->delete();
+        $request->session()->flash('message', 'Like Removed Successfully');
         return back();
     }
 }

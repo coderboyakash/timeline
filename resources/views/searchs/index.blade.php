@@ -9,6 +9,9 @@
 @endsection
 @section('content')
     <div class="container mt-5">
+    @if(session('message'))
+        <div class="alert alert-success">{{session('message')}}</div>
+        @endif
     <h4>Search results</h4>
         @foreach($users as $user)
             @if((!is_friends($user->id)) && (!is_request_sent($user->id)) && (!is_requested($user->id)))

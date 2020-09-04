@@ -9,6 +9,9 @@
 @endsection
 @section('content')
     <div class="container">
+        @if(session('message'))
+            <div class="alert alert-success">{{session('message')}}</div>
+        @endif
         <div class="center mt-5">
             <div class="row">
                 <div class="col-sm-4">

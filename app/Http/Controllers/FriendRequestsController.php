@@ -43,7 +43,7 @@ class FriendRequestsController extends Controller
             'token' => ['required']
         ]);
         FriendRequest::create($request->all());
-        $request->session()->flash('comment', 'Friend Request Sent Successfully');
+        $request->session()->flash('message', 'Friend Request Sent Successfully');
         return back();
     }
 

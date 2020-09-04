@@ -36,13 +36,14 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
+        $request->session()->flash('message', 'Please Enter Your Comment in the Comment Box');
         $data = $request->validate([
             'user_id' => ['required'],
             'post_id' => ['required'],
             'body' => ['required', 'string']
         ]);
         Comment::create($request->all());
-        $request->session()->flash('comment', 'Comment Created Successfully');
+        $request->session()->flash('message', 'Comment Created Successfully');
         return back();
     }
 
@@ -89,7 +90,7 @@ class CommentsController extends Controller
     public function destroy(Request $request,$id)
     {
         Comment::where('id', $id)->delete();
-        $request->session()->flash('comment', 'Comment Delete Successfully');
+        $request->session()->flash('message', 'Comment Delete Successfully');
         return back();
     }
 }

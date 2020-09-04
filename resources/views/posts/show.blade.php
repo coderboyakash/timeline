@@ -1,8 +1,8 @@
 @extends('layouts.master')
 @section('content')
 <div class="container">
-        @if(session('comment'))
-        <div class="alert alert-success">{{session('comment')}}</div>
+        @if(session('message'))
+        <div class="alert alert-success">{{session('message')}}</div>
         @endif
     <div class="row">
         <div class="col-sm-6 offset-sm-3">
@@ -20,7 +20,12 @@
                         <form action="{{ route('comment.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <input type="text" class="form-control" name="body">
+                                <input type="text" class="form-control @error('body') is-invalid @enderror" name="body">
+                                @error('body')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                                 <input type="hidden" name="post_id" value="{{ $post->id }}">
                                 <input type="hidden" name="return" value="show">
                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
