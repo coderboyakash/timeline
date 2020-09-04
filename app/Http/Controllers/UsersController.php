@@ -120,7 +120,8 @@ class UsersController extends Controller
     {
         //
     }
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $query = $request->input('search');
         $users = User::where('id', '!=', Auth::user()->id)->where('name', 'like', '%'.$query.'%')->get();
         return view('searchs.index', compact('users'));

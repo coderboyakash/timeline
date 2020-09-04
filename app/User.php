@@ -46,15 +46,20 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Post')->orderBy('id', 'DESC');
     }
+
     public function relations(){
         return $this->hasMany('App\Relation', 'friend_id');
     }
+
     public function requests(){
         return $this->hasMany('App\FriendRequest');
     }
-    public function likes(){
+
+    public function likes()
+    {
         return $this->hasMany('App\Like');
     }
+    
     public function comments(){
         return $this->hasMany('App\Comment');
     }
