@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Comment;
+use App\Post;
 class CommentsController extends Controller
 {
     /**
@@ -41,7 +42,7 @@ class CommentsController extends Controller
             'body' => ['required', 'string']
         ]);
         Comment::create($data);
-        return redirect('home');
+        return back();
     }
 
     /**
@@ -84,8 +85,11 @@ class CommentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        //
+        Comment::where('id', $id)->delete();
+        $request->session()->flash('comment', 'Comment Delete Successfully');
+        $post = Post::find($request->post_id);
+        return back();
     }
 }

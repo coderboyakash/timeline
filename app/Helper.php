@@ -39,4 +39,11 @@ use App\Like;
             return true;
         }
     }
+    function posted_by_me($id){
+        if(Auth::user()->id == $id){
+            return true;
+        }else{
+            return false;
+        }
+    }
 ?>

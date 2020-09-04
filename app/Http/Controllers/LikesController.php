@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Like;
+use App\Post;
 use Auth;
 class LikesController extends Controller
 {
@@ -41,7 +42,7 @@ class LikesController extends Controller
             'like' => ['required']
         ]);
         Like::create($data);
-        return redirect('home');
+        return back();
     }
 
     /**
@@ -84,9 +85,9 @@ class LikesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         Like::where('user_id', Auth::user()->id)->where('post_id', $id)->delete();
-        return redirect('home');
+        return back();
     }
 }

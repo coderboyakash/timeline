@@ -76,7 +76,8 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::findOrfail($id);
+        return view('posts.show', compact('post'));
     }
 
     /**

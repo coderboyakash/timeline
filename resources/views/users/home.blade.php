@@ -90,7 +90,7 @@
                                     </div>
                                 @endif
                                     <div class="col-sm-6">
-                                        <a class="btn btn-primary w-100 mb-2 mt-3">Show Post</a>
+                                        <a href="{{ route('post.show', $post->id) }}" class="btn btn-primary w-100 mb-2 mt-3">Show Post</a>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +150,7 @@
                                                 </div>
                                             @endif
                                             <div class="col-sm-6">
-                                                <button class="btn btn-primary w-100 mb-2 mt-3">Show Post</button>
+                                                <a href="{{ route('post.show', $post->id) }}" class="btn btn-primary w-100 mb-2 mt-3">Show Post</a>
                                             </div>
                                         </div>
                                     </div>
