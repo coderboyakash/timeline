@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Like;
+use Auth;
 class LikesController extends Controller
 {
     /**
@@ -34,7 +35,13 @@ class LikesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'user_id' => ['required'],
+            'post_id' => ['required'],
+            'like' => ['required']
+        ]);
+        Like::create($data);
+        return redirect('home');
     }
 
     /**
@@ -79,6 +86,7 @@ class LikesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Like::where('user_id', Auth::user()->id)->where('post_id', $id)->delete();
+        return redirect('home');
     }
 }

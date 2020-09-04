@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
+use App\Comment;
 class CommentsController extends Controller
 {
     /**
@@ -34,7 +35,13 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'user_id' => ['required'],
+            'post_id' => ['required'],
+            'body' => ['required', 'string']
+        ]);
+        Comment::create($data);
+        return redirect('home');
     }
 
     /**

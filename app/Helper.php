@@ -2,6 +2,7 @@
 // use Auth;
 use App\Relation;
 use App\FriendRequest;
+use App\Like;
     function is_friends($id){
         $result = Relation::where('user_2', $id)->where('user_1', Auth::user()->id)->get();
         if(count($result) == 0){
@@ -29,5 +30,13 @@ use App\FriendRequest;
     function token($sender_id){
         $request = FriendRequest::where('sender_id', $sender_id)->where('user_id', Auth::user()->id)->select('token')->first();
         return $request->token;
+    }
+    function is_liked($id){
+        $result = Like::where('user_id', Auth::user()->id)->where('post_id', $id)->get();
+        if(count($result) == 0){
+            return false;
+        }else{
+            return true;
+        }
     }
 ?>

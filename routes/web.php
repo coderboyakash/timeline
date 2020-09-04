@@ -22,6 +22,8 @@ Auth::routes();
 Route::get('/home', 'UsersController@index')->name('home');
 
 Route::resource('user', 'UsersController');
+Route::resource('user/comment', 'CommentsController');
+Route::resource('user/like', 'LikesController');
 Route::resource('user/post', 'PostsController');
 Route::resource('user/friendrequest', 'FriendRequestsController');
 Route::get('user/{user}', 'UsersController@show')->name('profile');

@@ -50,26 +50,47 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $post->title }}</h5>
                             <p class="card-text">{{ $post->body }} <span class="pull-right">[{{$post->created_at->diffForHumans()}}]</span></p>
-                            <span class="pull-left"><a href="#" class="text-decoration-none">{{ $post->likes ? count($post->likes) : '0' }} Likes</a></span>
-                            <span class="pull-right"><a href="#" class="text-decoration-none">{{ $post->comments ? count($post->comments) : '0' }} Comments</a></span>
+                            <span class="pull-left"><a href="" class="text-decoration-none">{{ $post->likes ? count($post->likes) : '0' }} Likes</a></span>
+                            <span class="pull-right"><a href="" class="text-decoration-none">{{ $post->comments ? count($post->comments) : '0' }} Comments</a></span>
                         </div>
                         <div class="row m-0">
                             <div class="col-sm-12">
-                                <form action="">
+                                <form action="{{ route('comment.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" name="body">
+                                        <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                     </div>
                                     <button type="submit" class="btn btn-primary w-100 mb-2"> <i class="fa fa-comment"></i> Comments</button>
                                 </form>
                             </div>
                             <div class="col-sm-12">
                                 <div class="row">
+                                @if(!is_liked($post->id))
                                     <div class="col-sm-6">
-                                        <button class="btn btn-primary w-100 mb-2"><i class="fa fa-thumbs-up"></i> Like</button>
+                                        <form action="{{ route('like.store') }}" method="POST">
+                                            @csrf
+                                            <div class="form-group">
+                                                <input type="hidden" class="form-control" name="like" value="1">
+                                                <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                            </div>
+                                            <button class="btn btn-primary w-100 mb-2"><i class="fa fa-thumbs-up"></i> Like</button>
+                                        </form>
                                     </div>
+                                @elseif(is_liked($post->id))
                                     <div class="col-sm-6">
-                                        <button class="btn btn-primary w-100 mb-2">Show Post</button>
+                                        <form action="{{ route('like.destroy', $post->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <div class="form-group"></div>
+                                            <button class="btn btn-disabled w-100 mb-2 border"><i style="color:blue;" class="fa fa-thumbs-up"></i> Liked</button>
+                                        </form>
+                                    </div>
+                                @endif
+                                    <div class="col-sm-6">
+                                        <a class="btn btn-primary w-100 mb-2 mt-3">Show Post</a>
                                     </div>
                                 </div>
                             </div>
@@ -89,25 +110,47 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $post->title }}</h5>
                                     <p class="card-text">{{ $post->body }} <span class="pull-right">[{{$post->created_at->diffForHumans()}}]</span></p>
-                                    <span class="pull-left"><a href="#" class="text-decoration-none">{{ $post->likes ? count($post->likes) : '0' }} Likes</a></span><span class="pull-right"><a href="#" class="text-decoration-none">5k Comments</a></span>
+                                    <span class="pull-left"><a href="" class="text-decoration-none">{{ $post->likes ? count($post->likes) : '0' }} Likes</a></span>
+                                    <span class="pull-right"><a href="" class="text-decoration-none">{{ $post->comments ? count($post->comments) : '0' }} Comments</a></span>
                                 </div>
                                 <div class="row m-0">
                                     <div class="col-sm-12">
-                                        <form action="">
+                                        <form action="{{ route('comment.store') }}" method="POST">
                                             @csrf
                                             <div class="form-group">
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" name="body">
+                                                <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                             </div>
                                             <button type="submit" class="btn btn-primary w-100 mb-2"> <i class="fa fa-comment"></i> Comments</button>
                                         </form>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="row">
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="row">
+                                            @if(!is_liked($post->id))
+                                                <div class="col-sm-6">
+                                                    <form action="{{ route('like.store') }}" method="POST">
+                                                        @csrf
+                                                        <div class="form-group">
+                                                            <input type="hidden" class="form-control" name="like" value="1">
+                                                            <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                        </div>
+                                                        <button class="btn btn-primary w-100 mb-2"><i class="fa fa-thumbs-up"></i> Like</button>
+                                                    </form>
+                                                </div>
+                                            @elseif(is_liked($post->id))
+                                                <div class="col-sm-6">
+                                                    <form action="{{ route('like.destroy', $post->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <div class="form-group"></div>
+                                                        <button class="btn btn-disabled w-100 mb-2 border"><i style="color:blue;" class="fa fa-thumbs-up"></i> Liked</button>
+                                                    </form>
+                                                </div>
+                                            @endif
                                             <div class="col-sm-6">
-                                                <button class="btn btn-primary w-100 mb-2"><i class="fa fa-thumbs-up"></i> Like</button>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <button class="btn btn-primary w-100 mb-2">Show Post</button>
+                                                <button class="btn btn-primary w-100 mb-2 mt-3">Show Post</button>
                                             </div>
                                         </div>
                                     </div>
