@@ -42,7 +42,8 @@ class FriendRequestsController extends Controller
             'sender_id' => ['required'],
             'token' => ['required']
         ]);
-        FriendRequest::create($data);
+        FriendRequest::create($request->all());
+        $request->session()->flash('comment', 'Friend Request Sent Successfully');
         return back();
     }
 
@@ -83,11 +84,11 @@ class FriendRequestsController extends Controller
             'token' => ['required']
         ]);
         Relation::create([
-            'user_id' => $data['sender_id'],
+            'user_id' => $request->sender_id,
             'friend_id' => Auth::user()->id,
         ]);
         Relation::create([
-                'friend_id' => $data['sender_id'],
+                'friend_id' => $request->sender_id,
                 'user_id' => Auth::user()->id,
         ]);
         return back();

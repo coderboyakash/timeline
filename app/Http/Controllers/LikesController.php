@@ -40,7 +40,7 @@ class LikesController extends Controller
             'user_id' => ['required'],
             'post_id' => ['required'],
         ]);
-        Like::create($data);
+        Like::create($request->all());
         return back();
     }
 

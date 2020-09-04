@@ -72,7 +72,6 @@
                                         <form action="{{ route('like.store') }}" method="POST">
                                             @csrf
                                             <div class="form-group">
-                                                <input type="hidden" class="form-control" name="like" value="1">
                                                 <input type="hidden" name="post_id" value="{{ $post->id }}">
                                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                             </div>
@@ -132,7 +131,6 @@
                                                     <form action="{{ route('like.store') }}" method="POST">
                                                         @csrf
                                                         <div class="form-group">
-                                                            <input type="hidden" class="form-control" name="like" value="1">
                                                             <input type="hidden" name="post_id" value="{{ $post->id }}">
                                                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                                         </div>

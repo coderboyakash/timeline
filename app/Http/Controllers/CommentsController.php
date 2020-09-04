@@ -41,7 +41,8 @@ class CommentsController extends Controller
             'post_id' => ['required'],
             'body' => ['required', 'string']
         ]);
-        Comment::create($data);
+        Comment::create($request->all());
+        $request->session()->flash('comment', 'Comment Created Successfully');
         return back();
     }
 
@@ -89,7 +90,6 @@ class CommentsController extends Controller
     {
         Comment::where('id', $id)->delete();
         $request->session()->flash('comment', 'Comment Delete Successfully');
-        $post = Post::find($request->post_id);
         return back();
     }
 }

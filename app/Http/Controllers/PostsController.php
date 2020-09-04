@@ -44,11 +44,7 @@ class PostsController extends Controller
             $image_name = $file->getClientOriginalName();
             $destinationPath = 'uploads';
             $file->move('img',$file->getClientOriginalName());
-            $post = Post::create([
-                'title' => $data['title'],
-                'body' => $data['body'],
-                'user_id' => $request->user_id,
-            ]);
+            $post = Post::create($request->all());
             Photo::create([
                 'post_id' => $post->id,
                 'user_id' => $request->user_id,
@@ -57,11 +53,7 @@ class PostsController extends Controller
             $request->session()->flash('success', 'Post Published Successfully');
             return redirect('home');
         }else{
-            $post = Post::create([
-                'title' => $data['title'],
-                'body' => $data['body'],
-                'user_id' => $request->user_id,
-            ]);
+            $post = Post::create($request->all());
             $request->session()->flash('success', 'Post Published Successfully');
             return redirect('home');
         }

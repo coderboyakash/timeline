@@ -83,8 +83,6 @@ class UsersController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$id],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'password_confirmation' => ['required', 'string', 'min:8'],
         ]);
         if($request->file('image')){
             $file = $request->file('image');
@@ -92,9 +90,8 @@ class UsersController extends Controller
             $destinationPath = 'uploads';
             $file->move('img',$file->getClientOriginalName());
             User::where('id', $id)->update([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password'])
+                'name' => $request->name,
+                'email' => $request->email
             ]);
             Photo::where('user_id', $id)->where('post_id', NULL)->delete();
             Photo::create([
@@ -105,9 +102,8 @@ class UsersController extends Controller
             return redirect('home');
         }else{
             User::where('id', $id)->update([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password'])
+                'name' => $request->name,
+                'email' => $request->email
             ]);
             $request->session()->flash('success', 'Profile Updated Successfully');
             return redirect('home');
