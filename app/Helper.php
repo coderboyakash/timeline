@@ -4,7 +4,7 @@ use App\Relation;
 use App\FriendRequest;
 use App\Like;
     function is_friends($id){
-        $result = Relation::where('user_2', $id)->where('user_1', Auth::user()->id)->get();
+        $result = Relation::where('friend_id', $id)->where('user_id', Auth::user()->id)->get();
         if(count($result) == 0){
             return false;
         }else{

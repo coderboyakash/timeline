@@ -21,7 +21,7 @@ class UsersController extends Controller
      */
     public function index()
     {        
-        $photo = Photo::where('meta_data', 'profile_pic')->where('user_id', Auth::user()->id)->first();
+        $photo = Photo::where('post_id', NULL)->where('user_id', Auth::user()->id)->first();
         return view('users.home', compact('photo'));
     }
 
@@ -55,7 +55,7 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-        $photo = Photo::where('meta_data', 'profile_pic')->where('user_id', $id)->first();
+        $photo = Photo::where('post_id', NULL)->where('user_id', $id)->first();
         return view('users.profile', compact('user', 'photo'));
     }
 

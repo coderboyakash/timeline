@@ -47,7 +47,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Post')->orderBy('id', 'DESC');
     }
     public function relations(){
-        return $this->hasMany('App\Relation', 'user_1');
+        return $this->hasMany('App\Relation', 'friend_id');
     }
     public function requests(){
         return $this->hasMany('App\FriendRequest');

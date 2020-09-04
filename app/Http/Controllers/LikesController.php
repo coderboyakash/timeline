@@ -39,7 +39,6 @@ class LikesController extends Controller
         $data = $request->validate([
             'user_id' => ['required'],
             'post_id' => ['required'],
-            'like' => ['required']
         ]);
         Like::create($data);
         return back();

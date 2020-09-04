@@ -17,7 +17,6 @@ class CreateLikesTable extends Migration
             $table->id();
             $table->tinyInteger('post_id')->nullable();
             $table->tinyInteger('user_id')->nullable();
-            $table->tinyInteger('like');
             $table->timestamps();
         });
     }

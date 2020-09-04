@@ -15,8 +15,8 @@ class CreateRelationsTable extends Migration
     {
         Schema::create('relations', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('user_1');
-            $table->tinyInteger('user_2');
+            $table->tinyInteger('user_id');
+            $table->tinyInteger('friend_id');
             $table->timestamps();
         });
     }

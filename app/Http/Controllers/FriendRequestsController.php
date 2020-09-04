@@ -43,7 +43,7 @@ class FriendRequestsController extends Controller
             'token' => ['required']
         ]);
         FriendRequest::create($data);
-        return redirect('search');
+        return back();
     }
 
     /**
@@ -83,14 +83,14 @@ class FriendRequestsController extends Controller
             'token' => ['required']
         ]);
         Relation::create([
-            'user_1' => $data['sender_id'],
-            'user_2' => Auth::user()->id,
+            'user_id' => $data['sender_id'],
+            'friend_id' => Auth::user()->id,
         ]);
         Relation::create([
-                'user_2' => $data['sender_id'],
-                'user_1' => Auth::user()->id,
+                'friend_id' => $data['sender_id'],
+                'user_id' => Auth::user()->id,
         ]);
-        return redirect('search');
+        return back();
     }
 
     /**
@@ -102,6 +102,6 @@ class FriendRequestsController extends Controller
     public function destroy(Request $request, $id)
     {
         FriendRequest::where("token", $request->token)->delete();
-        return redirect('search');
+        return back();
     }
 }
