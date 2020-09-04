@@ -11,4 +11,12 @@ class Post extends Model
     {
         return $this->hasOne('App\Photo');
     }
+    public function likes()
+    {
+        return $this->hasMany('App\Like');
+    }
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }

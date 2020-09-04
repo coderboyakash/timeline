@@ -50,7 +50,8 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $post->title }}</h5>
                             <p class="card-text">{{ $post->body }} <span class="pull-right">[{{$post->created_at->diffForHumans()}}]</span></p>
-                            <span class="pull-left"><a href="#" class="text-decoration-none">5k Likes</a></span><span class="pull-right"><a href="#" class="text-decoration-none">5k Comments</a></span>
+                            <span class="pull-left"><a href="#" class="text-decoration-none">{{ $post->likes ? count($post->likes) : '0' }} Likes</a></span>
+                            <span class="pull-right"><a href="#" class="text-decoration-none">{{ $post->comments ? count($post->comments) : '0' }} Comments</a></span>
                         </div>
                         <div class="row m-0">
                             <div class="col-sm-12">
@@ -88,7 +89,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $post->title }}</h5>
                                     <p class="card-text">{{ $post->body }} <span class="pull-right">[{{$post->created_at->diffForHumans()}}]</span></p>
-                                    <span class="pull-left"><a href="#" class="text-decoration-none">5k Likes</a></span><span class="pull-right"><a href="#" class="text-decoration-none">5k Comments</a></span>
+                                    <span class="pull-left"><a href="#" class="text-decoration-none">{{ $post->likes ? count($post->likes) : '0' }} Likes</a></span><span class="pull-right"><a href="#" class="text-decoration-none">5k Comments</a></span>
                                 </div>
                                 <div class="row m-0">
                                     <div class="col-sm-12">
