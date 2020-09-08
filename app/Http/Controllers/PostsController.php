@@ -40,10 +40,7 @@ class PostsController extends Controller
             'post_body' => ['required', 'string', 'min:8'],
         ]);
         if($request->file('image')){
-            $file = $request->file('image');
-            $image_name = $file->getClientOriginalName();
-            $destinationPath = 'uploads';
-            $file->move('img',$file->getClientOriginalName());
+            $path = $request->image->store('images', 'public');
             $post = Post::create([
                 'title' => $request->title,
                 'user_id' => $request->user_id,
@@ -52,7 +49,7 @@ class PostsController extends Controller
             Photo::create([
                 'post_id' => $post->id,
                 'user_id' => $request->user_id,
-                'name' => $image_name,
+                'path' => $path,
             ]);
             $request->session()->flash('message', 'Post Published Successfully');
             return redirect('home');
@@ -75,7 +72,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrfail($id);
+        $post = Post::find($id);
         return view('posts.show', compact('post'));
     }
 

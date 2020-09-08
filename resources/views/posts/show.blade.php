@@ -8,7 +8,7 @@
         <div class="col-sm-6 offset-sm-3">
             Posted By: {{ $post->user ? $post->user->name : '' }}@if(posted_by_me($post->user->id)) <strong>(you)</strong> @endif
             <div class="card mb-3">
-                <img src="/img/{{ $post->photo ? $post->photo->name : '' }}" class="card-img-top">
+                <img src="{{ asset('storage/'.$post->photo->path) }}" class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title">{{ $post->title }}</h5>
                     <p class="card-text">{{ $post->body }} <span class="pull-right">[{{$post->created_at->diffForHumans()}}]</span></p>
@@ -70,7 +70,7 @@
             <ul class="list-unstyled">
                 @foreach($post->comments as $comment)
                     <li class="media mb-2">
-                        <img src="/img/{{ $post->user->photo ? $post->user->photo->name : '' }}" class="mr-3" style="width:50px;">
+                        <img src="{{ asset('storage/'.$post->user->photo->path) }}" class="mr-3" style="width:50px;">
                         <div class="media-body">
                         <h5 class="mt-0 mb-1">{{ $comment->user->name }} @if(posted_by_me($comment->user->id)) <span>(you)</span> @endif</h5>
                         <p>{{ $comment->body }}</p>

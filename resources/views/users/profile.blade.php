@@ -15,7 +15,7 @@
         <div class="center mt-5">
             <div class="row">
                 <div class="col-sm-4">
-                    <img style="border-radius: 50px; width:150px; height:150px;" src="/img/{{ $photo ? $photo->name : 'notfound.png' }}">
+                    <img style="border-radius: 50px; width:150px; height:150px;" src="{{ asset('storage/'.$photo->path) }}">
                 </div>
                 <div class="col-sm-8">
                     <div>
@@ -36,7 +36,7 @@
             <h4>All Posts</h4><hr>
                 @foreach($user->posts as $post)
                     <div class="card mb-3">
-                        <img src="/img/{{ $post->photo ? $post->photo->name : '' }}" class="card-img-top">
+                        <img src="{{ asset('storage/'.$photo->path) }}" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title">{{ $post->title }}</h5>
                             <p class="card-text">{{ $post->body }}</p>

@@ -54,7 +54,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::find($id);
         $photo = Photo::where('post_id', NULL)->where('user_id', $id)->first();
         return view('users.profile', compact('user', 'photo'));
     }
@@ -67,7 +67,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::find($id);
         return view('users.edit', compact('user'));
     }
 
@@ -85,10 +85,7 @@ class UsersController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$id],
         ]);
         if($request->file('image')){
-            $file = $request->file('image');
-            $image_name = $file->getClientOriginalName();
-            $destinationPath = 'uploads';
-            $file->move('img',$file->getClientOriginalName());
+            $path = $request->image->store('images', 'public');
             User::where('id', $id)->update([
                 'name' => $request->name,
                 'email' => $request->email
@@ -96,7 +93,7 @@ class UsersController extends Controller
             Photo::where('user_id', $id)->where('post_id', NULL)->delete();
             Photo::create([
                 'user_id' => $id,
-                'name' => $image_name,
+                'path' => $path,
             ]);
             $request->session()->flash('message', 'Profile Updated Successfully');
             return redirect('home');

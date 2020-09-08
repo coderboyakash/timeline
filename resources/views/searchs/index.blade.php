@@ -17,7 +17,7 @@
             @if((!is_friends($user->id)) && (!is_request_sent($user->id)) && (!is_requested($user->id)))
             <div class="w-50 center mb-5">
                 <div class="media">
-                    <img src="/img/{{ $user->photo ? $user->photo->name : 'Not Found' }}" class="mr-3 rounded" style="width:100px;"alt="">
+                    <img src="{{ asset('storage/'.$user->photo->path) }}" class="mr-3 rounded" style="width:100px;"alt="">
                     <div class="media-body">
                         <h5 class="mt-0">{{ $user->name }}</h5>
                     </div>
@@ -34,7 +34,7 @@
             @else
             <div class="w-50 center mb-5">
                 <div class="media">
-                    <img src="/img/{{ $user->photo ? $user->photo->name : 'Not Found' }}" class="mr-3 rounded" style="width:100px;"alt="">
+                    <img src="{{ asset('storage/'.$user->photo->path) }}" class="mr-3 rounded" style="width:100px;"alt="">
                     <div class="media-body">
                         <h5 class="mt-0">{{ $user->name }}</h5>
                     </div>
